@@ -8,10 +8,6 @@ class FileStorage:
     """Manipulate the file that's storing data"""
     __file_path = 'file.json'
     __objects = {}
-    
-    def __init__(self, **kwargs):
-        if kwargs:
-            FileStorage.__objects.update(kwargs)
 
     def all(self):
         """Returns __objects"""
@@ -21,7 +17,7 @@ class FileStorage:
         """"""
         key = '{}.{}'.format(obj.__class__.__name__, obj.id)
         value = obj.__dict__
-        FileStorage.__objects[key] = value
+        self.__objects[key] = value
 
     def save(self):
         """Parsing the dict to file.json"""
@@ -37,12 +33,11 @@ class FileStorage:
                 self.__objects = json.loads(file.read())
                 print("Reload_Test")
         except FileNotFoundError:
-            print("No File")
+            print("No File Test")
             pass
 
 
-if __name__ == '_main__':
-    test = FileStorage({'name': 'Sameh', 'age': 28})
-    test.save()
+if __name__ == '__main__':
+    test = FileStorage()
     test.reload()
     print(test.all())
