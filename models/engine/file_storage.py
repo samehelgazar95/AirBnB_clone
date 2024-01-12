@@ -3,14 +3,20 @@
 almost followed the singleton pattern"""
 import json
 import os
-from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.amenity import Amenity
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
 
+
+models_map = {
+            'BaseModel': BaseModel, 'Amenity': Amenity,
+            'City': City, 'Place': Place, 'Review': Review,
+            'State': State, 'User': User
+        }
 
 class FileStorage:
     """Manipulate the file that's storing data
@@ -54,13 +60,8 @@ class FileStorage:
     def new_objects(data):
         """Create new __objects with every reload()"""
         FileStorage.__objects = {}
-        cls_map = {
-            'Amenity': Amenity, 'BaseModel': BaseModel,
-            'City': City, 'Place': Place, 'Review': Review,
-            'State': State, 'User': User
-        }
         for key, val in data.items():
             cls_name = val.get('__class__')
             if cls_name:
-                new_obj = cls_map[cls_name](**val)
+                new_obj = models_map[cls_name](**val)
                 FileStorage.__objects[key] = new_obj

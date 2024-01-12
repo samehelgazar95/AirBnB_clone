@@ -1,34 +1,8 @@
 {
-  "BaseModel.4973858f-d8a2-46a2-bdde-e385e5ac50c1": {
-    "id": "4973858f-d8a2-46a2-bdde-e385e5ac50c1",
-    "created_at": "2024-01-12T01:41:15.650285",
-    "updated_at": "2024-01-12T01:41:15.650335",
-    "name": "My_First_Model",
-    "my_number": 89,
-    "__class__": "BaseModel"
-  },
-  "BaseModel.c3f24185-4a0a-4cfb-a418-42682bf7d9f1": {
-    "id": "c3f24185-4a0a-4cfb-a418-42682bf7d9f1",
-    "created_at": "2024-01-12T01:41:17.021423",
-    "updated_at": "2024-01-12T01:41:17.021458",
-    "name": "My_First_Model",
-    "my_number": 89,
-    "__class__": "BaseModel"
-  },
-  "BaseModel.1f2e4a8c-21b4-4ac8-b383-538332cd34c0": {
-    "id": "1f2e4a8c-21b4-4ac8-b383-538332cd34c0",
-    "created_at": "2024-01-12T01:41:17.977754",
-    "updated_at": "2024-01-12T01:41:17.977790",
-    "name": "My_First_Model",
-    "my_number": 89,
-    "__class__": "BaseModel"
-  },
-  "BaseModel.38aedf66-1246-4807-8ac6-f974a292da98": {
-    "id": "38aedf66-1246-4807-8ac6-f974a292da98",
-    "created_at": "2024-01-12T01:41:19.158814",
-    "updated_at": "2024-01-12T01:41:19.158849",
-    "name": "My_First_Model",
-    "my_number": 89,
-    "__class__": "BaseModel"
-  }
+    "City.97690658-9fcc-4d78-ab7e-b180815e6a3b": {
+        "id": "97690658-9fcc-4d78-ab7e-b180815e6a3b",
+        "created_at": "2024-01-12T06:10:30.127905",
+        "updated_at": "2024-01-12T06:10:30.127955",
+        "__class__": "City"
+    }
 }
