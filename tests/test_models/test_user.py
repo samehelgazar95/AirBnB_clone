@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unit tests for file storage class"""
+"""Unit tests for file User Class"""
 import sys
 from io import StringIO
 from contextlib import redirect_stdout

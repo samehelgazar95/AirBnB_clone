@@ -29,7 +29,7 @@ class BaseModel:
     def __str__(self):
         """Editing the string representation of the object"""
         class_name = self.__class__.__name__
-        string = "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
+        string = str("[{}] ({}) {}".format(class_name, self.id, self.__dict__))
         return string
 
     def save(self):

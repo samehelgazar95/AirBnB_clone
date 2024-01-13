@@ -2,81 +2,29 @@
 """The console of HBnB project,
 to control the models and the storage engine"""
 import cmd
+from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
-from models.amenity import Amenity
+from models.state import State
 from models.city import City
 from models.place import Place
-from models.review import Review
-from models.state import State
+from models.amenity import Amenity
 from models.user import User
-from models.engine.file_storage import FileStorage
+from models.review import Review
 
-
-models_map = {
-            'BaseModel': BaseModel, 'Amenity': Amenity,
-            'City': City, 'Place': Place, 'Review': Review,
-            'State': State, 'User': User
-        }
-error_flag = 'error'
 
 class HBNBCommand(cmd.Cmd):
-    """HBNB Console to control the storage engine"""
+    """HBNB Console to control the storage engine
+        Arguments:
+            flag: Error flag
+    """
+
+    flag = 'error'
+    
 
     def __init__(self, completeKey='tab', stdin=None, stdout=None):
         """HBNBCommand Constructor"""
         super().__init__(completekey=completeKey, stdin=stdin, stdout=stdout)
         self.prompt = '(hbnb) '
-
-    def do_create(self, line):
-        """"""
-        if self.check_line(line) == error_flag:
-            return
-        if self.check_name(line) == error_flag:
-            return
-        my_model = models_map[line]()
-        my_model.save()
-        print(my_model.id)
-        
-    def do_s(self, line):
-        """"""
-        line_list = line.split(' ')
-        obj_name = line_list[0]
-        obj_id = line_list[1]
-        obj_key = obj_name + '.' + obj_id
-        if self.check_line(line) == error_flag:
-            return
-        if self.check_name(obj_name) == error_flag:
-            return
-        if self.check_id(obj_id) == error_flag:
-            return
-        if self.check_instance(obj_key) == error_flag:
-            return
-
-
-    def check_line(self, line):
-        """"""
-        if not line:
-            print('** class name missing **')
-            return error_flag
-
-    def check_name(self, name):
-        """"""
-        if name not in models_map:
-            print('** class doesn\'t exist **')
-            return error_flag
-        
-    def check_id(self, id):
-        """"""
-        if id not in FileStorage.__objects.values().id:
-            print('** instance id missing **')
-            return error_flag
-        
-    def check_instance(self, key):
-        """"""
-        if key not in FileStorage.__objects:
-            print('** no instance found **')
-            return error_flag
-        
 
     def emptyline(self):
         """Do nothing if the line is empty"""
@@ -91,6 +39,22 @@ class HBNBCommand(cmd.Cmd):
         print('')
         return True
 
+    def default(self, line):
+        """"""
+        if '.' in line:
+            args = line.split('.')  # [User, all()]
+            if args[0] in FileStorage.models_map.keys():
+                for key in self.all_objects().keys():
+                    if args[0] == key.split('.')[0]:
+                        if args[1] in self.all_methods().keys():
+                            self.args[1]
+                    else:
+                        print("** Objects is not found **")
+            else:
+                    print("** Models is not found **")
+        else:
+            print("Pleaase!")
+
     def help_quit(self):
         """The quit command help"""
         print('Quit command to exit the program\n')
@@ -98,6 +62,160 @@ class HBNBCommand(cmd.Cmd):
     def help_EOF(self):
         """The EOF command help"""
         print('EOF command to exit the program\n')
+
+    def do_create(self, line):
+        """Createing a new instance of BaseModel,
+            saves it (to the JSON file) and prints the id"""
+        if self.check_line(line) == HBNBCommand.flag:
+            return
+        if self.check_name(line) == HBNBCommand.flag:
+            return
+        my_model = FileStorage.models_map[line]()
+        my_model.save()
+        print(my_model.id)
+
+    def do_show(self, line):
+        """Printing the string representation of an instance
+            based on the class name """
+        if self.check_line(line) == HBNBCommand.flag:
+            return
+        args = line.split(' ')
+        length = len(args)
+        if self.check_name(args[0]) == HBNBCommand.flag:
+            return
+        elif length == 1:
+            print('** instance id missing **')
+            return
+        elif length == 2:
+            obj_key = '.'.join([args[0], args[1]])
+            if self.check_instance(obj_key) == HBNBCommand.flag:
+                return
+            print(self.all_objects()[obj_key])
+
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id"""
+        if self.check_line(line) == HBNBCommand.flag:
+            return
+        args = line.split(' ')
+        length = len(args)
+        if self.check_name(args[0]) == HBNBCommand.flag:
+            return
+        elif length == 1:
+            print('** instance id missing **')
+            return
+        if length == 2:
+            obj_key = '.'.join([args[0], args[1]])
+            if self.check_instance(obj_key) == HBNBCommand.flag:
+                return
+            del self.all_objects()[obj_key]
+            self.store_save()
+            self.store_reload()
+
+    def do_destroyall(self, line):
+        """Deletes all instances from __object
+            and from the file.json"""
+        if line:
+            print("** destroyall don't take any arguments **")
+            return
+        keys = list(self.all_objects().keys())
+        for key in keys:
+            del self.all_objects()[key]
+        self.store_save()
+        self.store_reload()
+
+    def do_all(self, line):
+        """Printing all string representation of all instances based,
+            or not on the class name"""
+        objects_list = []
+        if not line:
+            for val in self.all_objects().values():
+                objects_list.append(val.__str__())
+                print(objects_list)
+        else:
+            if self.check_name(line) == HBNBCommand.flag:
+                return
+            for key, val in self.all_objects().items():
+                if key.split('.')[0] == line:
+                    objects_list.append(val.__str__())
+                    print(objects_list)
+                else:
+                    return
+
+    def do_update(self, line):
+        """Updating the instance by adding new attribute or,
+            by updating the exising attribute"""
+        if self.check_line(line) == HBNBCommand.flag:
+            return
+        args = line.split(' ')
+        length = len(args)
+        if length > 4:
+            length = 4
+        if length >= 2:
+            obj_key = '.'.join([args[0], args[1]])
+        if self.check_name(args[0]) == HBNBCommand.flag:
+            return
+        elif length == 1:
+            print('** instance id missing **')
+            return
+        elif self.check_instance(obj_key) == HBNBCommand.flag:
+            return
+        elif length == 2:
+            print('** attribute name missing **')
+            return
+        elif length == 3:
+            print('** value missing **')
+            return
+        elif length == 4:
+            if args[2] in ['id', 'created_at', 'updated_at']:
+                return
+            setattr(self.all_objects()[obj_key],
+                    args[2], self.cast_attr(args[3]))
+            self.store_save()
+            self.store_reload()
+
+    def cast_attr(self, var):
+        """Editing the attr value before saving to the file.json"""
+        var = var.strip('\'"')
+        try:
+            return int(var)
+        except ValueError:
+            try:
+                return float(var)
+            except ValueError:
+                return str(var)
+
+    def check_line(self, line):
+        """Checking if the use didnot with the class name"""
+        if not line:
+            print('** class name missing **')
+            return HBNBCommand.flag
+
+    def check_name(self, name):
+        """Checking if the use is writing the class name wrongly"""
+        if name not in FileStorage.models_map:
+            print('** class doesn\'t exist **')
+            return HBNBCommand.flag
+
+    def check_instance(self, key):
+        """Checking if instance not found, by checking the obj_key"""
+        if key not in FileStorage.all(self).keys():
+            print('** no instance found **')
+            return HBNBCommand.flag
+
+    def all_objects(self):
+        """returns __objects dict variable from file_storage"""
+        return FileStorage.all(FileStorage)
+    
+    def all_methods(self):
+        return {'all': self.do_all(), 'show': self.do_show()}
+
+    def store_save(self):
+        """invokes save() func from file_storage"""
+        FileStorage.save(FileStorage)
+
+    def store_reload(self):
+        """invokes reload() func from file_storage"""
+        FileStorage.reload(FileStorage)
 
 
 if __name__ == '__main__':

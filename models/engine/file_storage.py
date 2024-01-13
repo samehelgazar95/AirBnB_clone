@@ -4,28 +4,28 @@ almost followed the singleton pattern"""
 import json
 import os
 from models.base_model import BaseModel
-from models.amenity import Amenity
+from models.state import State
 from models.city import City
 from models.place import Place
-from models.review import Review
-from models.state import State
+from models.amenity import Amenity
 from models.user import User
+from models.review import Review
 
-
-models_map = {
-            'BaseModel': BaseModel, 'Amenity': Amenity,
-            'City': City, 'Place': Place, 'Review': Review,
-            'State': State, 'User': User
-        }
 
 class FileStorage:
     """Manipulate the file that's storing data
         Arguments:
             __file_path: to store the JSON format
-            __objects: {ClassName.id: Object, ClassName.id: Object}
+            __objects: {"ClassName.id": Object, "ClassName.id": Object}
+            models_map: mapping the models for easy accessing
     """
     __file_path = "file.json"
     __objects = {}
+    models_map = {
+                'BaseModel': BaseModel, 'Amenity': Amenity,
+                'City': City, 'Place': Place, 'Review': Review,
+                'State': State, 'User': User
+            }
 
     def all(self):
         """Simple function returns the private __objects"""
@@ -63,5 +63,5 @@ class FileStorage:
         for key, val in data.items():
             cls_name = val.get('__class__')
             if cls_name:
-                new_obj = models_map[cls_name](**val)
+                new_obj = FileStorage.models_map[cls_name](**val)
                 FileStorage.__objects[key] = new_obj
