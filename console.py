@@ -42,18 +42,19 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         """"""
         if '.' in line:
-            args = line.split('.')  # [User, all()]
-            if args[0] in FileStorage.models_map.keys():
-                for key in self.all_objects().keys():
-                    if args[0] == key.split('.')[0]:
-                        if args[1] in self.all_methods().keys():
-                            self.args[1]
-                    else:
-                        print("** Objects is not found **")
-            else:
-                    print("** Models is not found **")
-        else:
-            print("Pleaase!")
+            args = line.split('.')  
+            if len(args) == 2:
+                cls_name, cls_method = args # [User, all()]
+                if cls_name in FileStorage.models_map:
+                    methods_map = {
+                        'create': self.do_create, 'show': self.do_show, 
+                        'all': self.do_all, 'destroy': self.do_destroy,
+                        'destroyall': self.do_destroyall, 'update': self.do_update
+                    }
+                if cls_method in methods_map:
+                    methods_map[cls_method](cls_name)
+                    return
+
 
     def help_quit(self):
         """The quit command help"""
@@ -205,9 +206,6 @@ class HBNBCommand(cmd.Cmd):
     def all_objects(self):
         """returns __objects dict variable from file_storage"""
         return FileStorage.all(FileStorage)
-    
-    def all_methods(self):
-        return {'all': self.do_all(), 'show': self.do_show()}
 
     def store_save(self):
         """invokes save() func from file_storage"""
