@@ -46,20 +46,20 @@ class TestBase(unittest.TestCase):
     def test_does_user_has_password_attr(self):
         b = User()
         self.assertTrue(hasattr(b, 'password'))
-        
+
     def test_does_user_has_first_name_attr(self):
         b = User()
         self.assertTrue(hasattr(b, 'first_name'))
-        
+
     def test_does_user_has_last_name_attr(self):
         b = User()
         self.assertTrue(hasattr(b, 'last_name'))
-        
+
     def test_instantiation(self):
         """Test object creation and attribute setting."""
         obj = User(name="Sameh")
         self.assertEqual(obj.name, "Sameh")
 
-        
+
 if __name__ == "__main__":
     unittest.main()

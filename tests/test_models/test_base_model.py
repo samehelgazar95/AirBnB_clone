@@ -25,7 +25,8 @@ class TestBase(unittest.TestCase):
 
     def test_is_basemodel_a_class(self):
         obj = BaseModel()
-        self.assertTrue(str(obj.__class__), "<class 'models.base_model.BaseModel'>")
+        cls_str = "<class 'models.base_model.BaseModel'>"
+        self.assertTrue(str(obj.__class__), cls_str)
 
     def test_does_basemodel_has_id_attr(self):
         obj = BaseModel()
@@ -48,14 +49,16 @@ class TestBase(unittest.TestCase):
 
     def test_str(self):
         obj = BaseModel()
-        obj.created_at = datetime.datetime(2024, 1, 1, 1, 1, 1, int(0.123456*1000000))
+        date = 2024, 1, 1, 1, 1, 1, int(0.123456*1000000)
+        obj.created_at = datetime.datetime(date)
         cls_name = obj.to_dict()['__class__']
         excepted_str = f"[{cls_name}] ({obj.id}) {obj.__dict__}"
         self.assertEqual(str(obj), excepted_str)
 
     def test_to_dict(self):
         obj = BaseModel()
-        obj.created_at = datetime.datetime(2024, 1, 1, 0, 0, 0, int(0.123456*1000000))
+        date = 2024, 1, 1, 0, 0, 0, int(0.123456*1000000)
+        obj.created_at = datetime.datetime(date)
         expected_dict = {
             'id': obj.id,
             'created_at': '2024-01-01T00:00:00.123456',
@@ -66,7 +69,8 @@ class TestBase(unittest.TestCase):
 
     def test_save(self):
         obj = BaseModel()
-        obj.created_at = datetime.datetime(2024, 1, 1, 0, 0, 0, int(0.123456*1000000))
+        date = 2024, 1, 1, 0, 0, 0, int(0.123456*1000000)
+        obj.created_at = datetime.datetime(date)
         expected_dict = {
             'id': obj.id,
             'created_at': '2024-01-01T00:00:00.123456',

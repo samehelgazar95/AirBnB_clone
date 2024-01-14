@@ -38,7 +38,7 @@ class TestBase(unittest.TestCase):
     def test_does_City_has_updated_at_attr(self):
         obj = City()
         self.assertTrue(hasattr(obj, 'updated_at'))
-        
+
     def test_does_City_has_state_id_attr(self):
         obj = City()
         self.assertTrue(hasattr(obj, 'state_id'))
@@ -57,6 +57,7 @@ class TestBase(unittest.TestCase):
         """Test inheritance from BaseModel."""
         obj = City(state_id="123", name="Shebin El-Koum")
         self.assertIsNotNone(obj.state_id)
+
 
 if __name__ == "__main__":
     unittest.main()

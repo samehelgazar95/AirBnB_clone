@@ -38,7 +38,7 @@ class TestBase(unittest.TestCase):
     def test_does_Place_has_updated_at_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'updated_at'))
-        
+
     def test_does_Place_has_city_id_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'city_id'))
@@ -49,7 +49,7 @@ class TestBase(unittest.TestCase):
 
     def test_does_Place_has_name_attr(self):
         obj = Place()
-        self.assertTrue(hasattr(obj, 'name'))        
+        self.assertTrue(hasattr(obj, 'name'))
 
     def test_does_Place_has_description_attr(self):
         obj = Place()
@@ -58,27 +58,27 @@ class TestBase(unittest.TestCase):
     def test_does_Place_has_number_rooms_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'number_rooms'))
-        
+
     def test_does_Place_has_number_bathrooms_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'number_bathrooms'))
-    
+
     def test_does_Place_has_max_guest_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'max_guest'))
-    
+
     def test_does_Place_has_price_by_night_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'price_by_night'))
-        
+
     def test_does_Place_has_latitude_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'latitude'))
-        
+
     def test_does_Place_has_longitude_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'longitude'))
-        
+
     def test_does_Place_has_amenity_ids_attr(self):
         obj = Place()
         self.assertTrue(hasattr(obj, 'amenity_ids'))

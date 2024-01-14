@@ -16,7 +16,7 @@ class TestBase(unittest.TestCase):
     def tearDown(self):
         '''Cleans up after each test_method.'''
         pass
-    
+
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.amenity.__doc__) > 0)
 
@@ -38,7 +38,7 @@ class TestBase(unittest.TestCase):
     def test_does_Amenity_has_updated_at_attr(self):
         obj = Amenity()
         self.assertTrue(hasattr(obj, 'updated_at'))
-    
+
     def test_does_amenity_has_name_attr(self):
         obj = Amenity()
         self.assertTrue(hasattr(obj, 'name'))

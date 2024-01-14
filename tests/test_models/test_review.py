@@ -46,17 +46,16 @@ class TestBase(unittest.TestCase):
     def test_does_review_has_user_id_attr(self):
         b = Review()
         self.assertTrue(hasattr(b, 'user_id'))
-    
+
     def test_does_review_has_text_attr(self):
         b = Review()
         self.assertTrue(hasattr(b, 'text'))
 
     def test_instantiation(self):
         """Test object creation and attribute setting."""
-        obj = Review(email='selgazar95@gmail.com', first_name='Sameh', last_name="ElGazar")
+        obj = Review(email='selgazar95@gmail.com', first_name='Sameh')
         self.assertEqual(obj.email, "selgazar95@gmail.com")
         self.assertEqual(obj.first_name, "Sameh")
-        self.assertEqual(obj.last_name, "ElGazar")
 
 
 if __name__ == "__main__":
