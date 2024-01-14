@@ -23,21 +23,29 @@ class TestBase(unittest.TestCase):
     def test_does_class_has_doc(self):
         self.assertTrue(len(City.__doc__) > 0)
 
-    def test_is_city_a_class(self):
-        b = City()
-        self.assertTrue(str(b.__class__), "<class 'models.city.City'>")
+    def test_is_City_a_class(self):
+        obj = City()
+        self.assertTrue(str(obj.__class__), "<class 'models.city.City'>")
 
-    def test_does_city_has_id_attr(self):
-        b = City()
-        self.assertTrue(hasattr(b, 'id'))
+    def test_does_City_has_id_attr(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'id'))
 
-    def test_does_city_has_created_at_attr(self):
-        b = City()
-        self.assertTrue(hasattr(b, 'created_at'))
+    def test_does_City_has_created_at_attr(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'created_at'))
 
-    def test_does_city_has_updated_at_attr(self):
-        b = City()
-        self.assertTrue(hasattr(b, 'updated_at'))
+    def test_does_City_has_updated_at_attr(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'updated_at'))
+        
+    def test_does_City_has_state_id_attr(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'state_id'))
+
+    def test_does_City_has_name_attr(self):
+        obj = City()
+        self.assertTrue(hasattr(obj, 'name'))
 
 
 if __name__ == "__main__":

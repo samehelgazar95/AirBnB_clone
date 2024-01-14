@@ -39,6 +39,18 @@ class TestBase(unittest.TestCase):
         b = Review()
         self.assertTrue(hasattr(b, 'updated_at'))
 
+    def test_does_review_has_place_id_attr(self):
+        b = Review()
+        self.assertTrue(hasattr(b, 'place_id'))
+
+    def test_does_review_has_user_id_attr(self):
+        b = Review()
+        self.assertTrue(hasattr(b, 'user_id'))
+    
+    def test_does_review_has_text_attr(self):
+        b = Review()
+        self.assertTrue(hasattr(b, 'text'))
+
 
 if __name__ == "__main__":
     unittest.main()

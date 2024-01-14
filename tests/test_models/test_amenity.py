@@ -1,14 +1,8 @@
 #!/usr/bin/python3
 """Unit tests for file Amenity Class"""
 import unittest
-from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
-from models.state import State
-from models.city import City
-from models.place import Place
+import models
 from models.amenity import Amenity
-from models.user import User
-from models.review import Review
 
 
 class TestBase(unittest.TestCase):
@@ -22,6 +16,32 @@ class TestBase(unittest.TestCase):
         '''Cleans up after each test_method.'''
         pass
     
+    def test_does_module_has_doc(self):
+        self.assertTrue(len(models.amenity.__doc__) > 0)
+
+    def test_does_class_has_doc(self):
+        self.assertTrue(len(Amenity.__doc__) > 0)
+
+    def test_is_Amenity_a_class(self):
+        obj = Amenity()
+        self.assertTrue(str(obj.__class__), "<class 'models.amenity.Amenity'>")
+
+    def test_does_Amenity_has_id_attr(self):
+        obj = Amenity()
+        self.assertTrue(hasattr(obj, 'id'))
+
+    def test_does_Amenity_has_created_at_attr(self):
+        obj = Amenity()
+        self.assertTrue(hasattr(obj, 'created_at'))
+
+    def test_does_Amenity_has_updated_at_attr(self):
+        obj = Amenity()
+        self.assertTrue(hasattr(obj, 'updated_at'))
     
+    def test_does_amenity_has_name_attr(self):
+        obj = Amenity()
+        self.assertTrue(hasattr(obj, 'name'))
+
+
 if __name__ == "__main__":
     unittest.main()

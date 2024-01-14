@@ -39,6 +39,10 @@ class TestBase(unittest.TestCase):
         b = State()
         self.assertTrue(hasattr(b, 'updated_at'))
 
+    def test_does_state_has_name_attr(self):
+        b = State()
+        self.assertTrue(hasattr(b, 'name'))
+
 
 if __name__ == "__main__":
     unittest.main()

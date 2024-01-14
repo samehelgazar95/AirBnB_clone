@@ -39,6 +39,22 @@ class TestBase(unittest.TestCase):
         b = User()
         self.assertTrue(hasattr(b, 'updated_at'))
 
+    def test_does_user_has_email_attr(self):
+        b = User()
+        self.assertTrue(hasattr(b, 'email'))
 
+    def test_does_user_has_password_attr(self):
+        b = User()
+        self.assertTrue(hasattr(b, 'password'))
+        
+    def test_does_user_has_first_name_attr(self):
+        b = User()
+        self.assertTrue(hasattr(b, 'first_name'))
+        
+    def test_does_user_has_last_name_attr(self):
+        b = User()
+        self.assertTrue(hasattr(b, 'last_name'))
+        
+        
 if __name__ == "__main__":
     unittest.main()
