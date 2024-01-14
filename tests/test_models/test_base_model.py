@@ -58,7 +58,7 @@ class TestBase(unittest.TestCase):
         }
         self.assertEqual(b.to_dict(), expected_dict)
 
-    def test_to_dict(self):
+    def test_save(self):
         b = BaseModel()
         b.created_at = datetime.datetime(2024, 1, 1, 0, 0, 0, int(0.123456*1000000))
         expected_dict = {
@@ -68,6 +68,7 @@ class TestBase(unittest.TestCase):
             '__class__': b.to_dict()['__class__']
         }
         self.assertEqual(b.to_dict(), expected_dict)
+
 
 if __name__ == "__main__":
     unittest.main()
