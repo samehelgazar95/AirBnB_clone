@@ -12,7 +12,7 @@ class BaseModel:
     DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
     def __init__(self, *args, **kwargs):
-        """Init method inistantiated with 3 attrs"""
+        """Init method instantiated with 3 attrs"""
         if kwargs:
             for key, val in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':

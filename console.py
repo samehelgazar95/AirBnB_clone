@@ -13,7 +13,7 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    """HBNB Console to control the storage engine
+    """HBNBConsole to control the storage engine
         Arguments:
             flag: Error flag
     """
@@ -30,11 +30,11 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_quit(self, line):
-        """Quiting if line == quit"""
+        """Quitting if line == quit"""
         return True
 
     def do_EOF(self, line):
-        """Quiting with ctrl+d"""
+        """Quitting with ctrl+d"""
         print('')
         return True
 
@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         print('EOF command to exit the program\n')
 
     def do_create(self, line):
-        """Createing a new instance of BaseModel,
+        """Creating a new instance of BaseModel,
             saves it (to the JSON file) and prints the id"""
         if self.check_line(line) == HBNBCommand.flag:
             return
