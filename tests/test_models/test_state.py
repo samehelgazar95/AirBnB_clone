@@ -43,6 +43,11 @@ class TestBase(unittest.TestCase):
         b = State()
         self.assertTrue(hasattr(b, 'name'))
 
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        obj = State(name="Menoufia")
+        self.assertEqual(obj.name, "Menoufia")
+
 
 if __name__ == "__main__":
     unittest.main()

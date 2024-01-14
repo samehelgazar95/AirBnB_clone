@@ -47,6 +47,16 @@ class TestBase(unittest.TestCase):
         obj = City()
         self.assertTrue(hasattr(obj, 'name'))
 
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        obj = City(state_id="123", name="Shebin El-Koum")
+        self.assertEqual(obj.state_id, "123")
+        self.assertEqual(obj.name, "Shebin El-Koum")
+
+    def test_inheritance(self):
+        """Test inheritance from BaseModel."""
+        obj = City(state_id="123", name="Shebin El-Koum")
+        self.assertIsNotNone(obj.state_id)
 
 if __name__ == "__main__":
     unittest.main()

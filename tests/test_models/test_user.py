@@ -55,6 +55,11 @@ class TestBase(unittest.TestCase):
         b = User()
         self.assertTrue(hasattr(b, 'last_name'))
         
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        obj = User(name="Sameh")
+        self.assertEqual(obj.name, "Sameh")
+
         
 if __name__ == "__main__":
     unittest.main()

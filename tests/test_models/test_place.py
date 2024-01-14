@@ -83,6 +83,12 @@ class TestBase(unittest.TestCase):
         obj = Place()
         self.assertTrue(hasattr(obj, 'amenity_ids'))
 
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        obj = Place(description="delicious", max_guest=0)
+        self.assertEqual(obj.description, "delicious")
+        self.assertEqual(obj.max_guest, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

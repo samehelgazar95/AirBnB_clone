@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Unit tests for file Amenity Class"""
 import unittest
+import datetime
 import models
 from models.amenity import Amenity
 
@@ -41,6 +42,11 @@ class TestBase(unittest.TestCase):
     def test_does_amenity_has_name_attr(self):
         obj = Amenity()
         self.assertTrue(hasattr(obj, 'name'))
+
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        obj = Amenity(name="Share3 El Mdares")
+        self.assertEqual(obj.name, "Share3 El Mdares")
 
 
 if __name__ == "__main__":
