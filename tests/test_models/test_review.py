@@ -51,6 +51,20 @@ class TestBase(unittest.TestCase):
         b = Review()
         self.assertTrue(hasattr(b, 'text'))
 
+    def test_instantiation(self):
+        """Test object creation and attribute setting."""
+        review = review.Review(place_id="123", user_id="456", text="Great place!")
+        self.assertEqual(review.place_id, "123")
+        self.assertEqual(review.user_id, "456")
+        self.assertEqual(review.text, "Great place!")
+
+    def test_inheritance(self):
+        """Test inheritance from BaseModel."""
+        review = review.Review(place_id="123", user_id="456", text="Great place!")
+        self.assertIsNotNone(review.id)
+        self.assertIsInstance(review.created_at, datetime.datetime)
+        self.assertIsInstance(review.updated_at, datetime.datetime)
+
 
 if __name__ == "__main__":
     unittest.main()
