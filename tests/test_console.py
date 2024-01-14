@@ -3,6 +3,7 @@
 import unittest
 from console import HBNBCommand
 
+
 class TestBase(unittest.TestCase):
     """UnitTest for Base Class Class"""
 
