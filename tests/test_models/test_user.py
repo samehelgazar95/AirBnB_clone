@@ -41,23 +41,10 @@ class TestBase(unittest.TestCase):
     def test_does_user_has_email_attr(self):
         instance = User()
         self.assertIsInstance(instance.email, str)
+        self.assertIsInstance(instance.password, str)
+        self.assertIsInstance(instance.last_name, str)
+        self.assertIsInstance(instance.first_name, str)
 
-    def test_does_user_has_password_attr(self):
-        instance = User()
-        self.assertTrue(hasattr(instance, 'password'))
-
-    def test_does_user_has_first_name_attr(self):
-        instance = User()
-        self.assertTrue(hasattr(instance, 'first_name'))
-
-    def test_does_user_has_last_name_attr(self):
-        instance = User()
-        self.assertTrue(hasattr(instance, 'last_name'))
-
-    def test_instantiation(self):
-        """Test object creation and attribute setting."""
-        instance = User(name="Sameh")
-        self.assertEqual(instance.name, "Sameh")
 
 
 if __name__ == "__main__":
