@@ -1,20 +1,24 @@
 #!/usr/bin/python3
 """Unit tests for file Base Class"""
 import unittest
+import os
+from models.engine.file_storage import FileStorage
 import models
 from models.user import User
 
 
 class TestBase(unittest.TestCase):
     """UnitTest for Base Class Class"""
-
+    
     def setUp(self):
         '''Imports module, instantiates class'''
         pass
 
     def tearDown(self):
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
         '''Cleans up after each test_method.'''
-        pass
 
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.user.__doc__) > 0)

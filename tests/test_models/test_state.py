@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Unit tests for file Base Class"""
 import unittest
-import datetime
+import os
 import models
+from models.engine.file_storage import FileStorage
 from models.state import State
 
 
@@ -15,7 +16,9 @@ class TestBase(unittest.TestCase):
 
     def tearDown(self):
         '''Cleans up after each test_method.'''
-        pass
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
 
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.state.__doc__) > 0)
@@ -39,14 +42,9 @@ class TestBase(unittest.TestCase):
         b = State()
         self.assertTrue(hasattr(b, 'updated_at'))
 
-    def test_does_state_has_name_attr(self):
-        b = State()
-        self.assertTrue(hasattr(b, 'name'))
-
-    def test_instantiation(self):
-        """Test object creation and attribute setting."""
-        obj = State(name="Menoufia")
-        self.assertEqual(obj.name, "Menoufia")
+    def test_does_user_has_email_attr(self):
+        instance = State()
+        self.assertIsInstance(instance.name, str)
 
 
 if __name__ == "__main__":

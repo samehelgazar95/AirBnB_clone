@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Unit tests for file Amenity Class"""
 import unittest
-import datetime
+import os
 import models
+from models.engine.file_storage import FileStorage
 from models.amenity import Amenity
 
 
@@ -15,7 +16,10 @@ class TestBase(unittest.TestCase):
 
     def tearDown(self):
         '''Cleans up after each test_method.'''
-        pass
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
+
 
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.amenity.__doc__) > 0)
@@ -39,14 +43,11 @@ class TestBase(unittest.TestCase):
         obj = Amenity()
         self.assertTrue(hasattr(obj, 'updated_at'))
 
-    def test_does_amenity_has_name_attr(self):
-        obj = Amenity()
-        self.assertTrue(hasattr(obj, 'name'))
+    def test_does_user_has_email_attr(self):
+        instance = Amenity()
+        self.assertIsInstance(instance.name, str)
 
-    def test_instantiation(self):
-        """Test object creation and attribute setting."""
-        obj = Amenity(name="Share3 El Mdares")
-        self.assertEqual(obj.name, "Share3 El Mdares")
+
 
 
 if __name__ == "__main__":

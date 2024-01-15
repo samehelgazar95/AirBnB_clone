@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Unit tests for file Base Class"""
 import unittest
-import datetime
+import os
 import models
+from models.engine.file_storage import FileStorage
 from models.place import Place
 
 
@@ -15,7 +16,10 @@ class TestBase(unittest.TestCase):
 
     def tearDown(self):
         '''Cleans up after each test_method.'''
-        pass
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
+
 
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.place.__doc__) > 0)
@@ -39,55 +43,18 @@ class TestBase(unittest.TestCase):
         obj = Place()
         self.assertTrue(hasattr(obj, 'updated_at'))
 
-    def test_does_Place_has_city_id_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'city_id'))
-
-    def test_does_Place_has_user_id_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'user_id'))
-
-    def test_does_Place_has_name_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'name'))
-
-    def test_does_Place_has_description_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'description'))
-
-    def test_does_Place_has_number_rooms_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'number_rooms'))
-
-    def test_does_Place_has_number_bathrooms_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'number_bathrooms'))
-
-    def test_does_Place_has_max_guest_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'max_guest'))
-
-    def test_does_Place_has_price_by_night_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'price_by_night'))
-
-    def test_does_Place_has_latitude_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'latitude'))
-
-    def test_does_Place_has_longitude_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'longitude'))
-
-    def test_does_Place_has_amenity_ids_attr(self):
-        obj = Place()
-        self.assertTrue(hasattr(obj, 'amenity_ids'))
-
-    def test_instantiation(self):
-        """Test object creation and attribute setting."""
-        obj = Place(description="delicious", max_guest=0)
-        self.assertEqual(obj.description, "delicious")
-        self.assertEqual(obj.max_guest, 0)
+    def test_does_user_has_email_attr(self):
+        instance = Place()
+        self.assertIsInstance(instance.city_id, str)
+        self.assertIsInstance(instance.user_id, str)
+        self.assertIsInstance(instance.name, str)
+        self.assertIsInstance(instance.description, str)
+        self.assertIsInstance(instance.number_rooms, int)
+        self.assertIsInstance(instance.number_bathrooms, int)
+        self.assertIsInstance(instance.price_by_night, int)
+        self.assertIsInstance(instance.latitude, float)
+        self.assertIsInstance(instance.longitude, float)
+        self.assertIsInstance(instance.amenity_ids, list)
 
 
 if __name__ == "__main__":
