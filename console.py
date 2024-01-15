@@ -68,8 +68,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 if ',' not in params:
                     # Handling just id arg, ex: args = id
-                    all_params = [obj] + params.strip(quotes+')').split(quotes)
-                    all_params = ' '.join(all_params).strip(' ')
+                    all_params = obj + ' ' + params.strip(quotes+')')
                 elif ',' in params:
                     # Handling args for update(), id - key - val
                     id, items = params.split(',', 1)
@@ -77,16 +76,7 @@ class HBNBCommand(cmd.Cmd):
                     items = items.strip(' )(')
 
                     if items.startswith('{') and items.endswith('}'):
-                        dict_items = items.strip('{ }').split(',')
-                        for item in dict_items:
-                            # Handling passing dictionary to update()
-                            k, v = item.split(':')
-                            k, v = k.strip(quotes), v.strip(quotes)
-                            all_params = list((obj, id, k, v))
-                            all_params = ' '.join(all_params).strip(' ')
-                            # Invoking update() for each item
-                            if method in methods.keys():
-                                methods[method](all_params)
+                        all_params = obj + ' ' + id + ' ' + items
                     else:
                         # Handling just one item (key, val) passing to update()
                         k_and_v = [x.strip(quotes) for x in items.split(',')]
@@ -192,9 +182,8 @@ class HBNBCommand(cmd.Cmd):
         if self.check_line(line) == HBNBCommand.flag:
             return
         args = line.split(' ')
+        quotes = ' "\''
         length = len(args)
-        if length > 4:
-            length = 4
         if length >= 2:
             obj_key = '.'.join([args[0], args[1]])
         if self.check_name(args[0]) == HBNBCommand.flag:
@@ -211,12 +200,33 @@ class HBNBCommand(cmd.Cmd):
             print('** value missing **')
             return
         elif length == 4:
-            if args[2] in ['id', 'created_at', 'updated_at']:
+            # Handling adding one attribute
+            if self.attr_valid(args[2]) == HBNBCommand.flag:
                 return
             setattr(self.all_objects()[obj_key],
-                    args[2], self.cast_attr(args[3]))
-            self.store_save()
-            self.store_reload()
+                    args[2].strip(quotes), self.cast_attr(args[3]))
+        elif length > 4:
+            # Handling if there is a dictionary with valid items
+            if args[2].startswith('{') and args[-1].endswith('}'):
+                expected_dict = eval(' '.join(args[2:]))
+                print(args)
+                if type(expected_dict) == dict:
+                    for k, v in expected_dict.items():
+                        if self.attr_valid(args[2]) == HBNBCommand.flag:
+                            return
+                        setattr(self.all_objects()[obj_key],
+                                k.strip(quotes), self.cast_attr(v))
+            else:
+                # Handling more than attr and no dictionary
+                setattr(self.all_objects()[obj_key],
+                        args[2].strip(quotes), self.cast_attr(args[3]))
+                print(args)
+        self.store_save()
+        self.store_reload()
+
+    def attr_valid(self, attr):
+        if attr in ['id', 'created_at', 'updated_at']:
+            return HBNBCommand.flag
 
     def do_count(self, line):
         """Printing all string representation of all instances based,
@@ -234,13 +244,13 @@ class HBNBCommand(cmd.Cmd):
 
     def cast_attr(self, var):
         """Editing the attr value before saving to the file.json"""
-        var = var.strip('\'"')
         try:
             return int(var)
         except ValueError:
             try:
                 return float(var)
             except ValueError:
+                var = var.strip(' \'"')
                 return str(var)
 
     def check_line(self, line):

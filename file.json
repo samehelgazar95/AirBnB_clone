@@ -1,25 +1,10 @@
 {
-    "City.0d047380-e7c5-47b7-9109-c498d75b30b5": {
-        "id": "0d047380-e7c5-47b7-9109-c498d75b30b5",
-        "created_at": "2024-01-14T23:37:39.927868",
-        "updated_at": "2024-01-14T23:37:39.927904",
-        "__class__": "City"
-    },
-    "BaseModel.d04d1f99-9fac-4548-bbf4-a4cbd2550007": {
-        "id": "d04d1f99-9fac-4548-bbf4-a4cbd2550007",
-        "created_at": "2024-01-15T02:38:05.044123",
-        "updated_at": "2024-01-15T02:38:05.044139",
-        "__class__": "BaseModel"
-    },
-    "User.ce50bba5-6f40-45f7-adfc-867159f726ce": {
-        "id": "ce50bba5-6f40-45f7-adfc-867159f726ce",
-        "created_at": "2024-01-15T03:21:55.137515",
-        "updated_at": "2024-01-15T03:21:55.137541",
-        "first": "Sameh",
-        "last": "Gazar",
-        "Hello": "World",
-        "Hi": "There",
-        "'age'": 28,
+    "User.94d34430-aff6-45ff-aae4-7a5df77780fc": {
+        "id": "94d34430-aff6-45ff-aae4-7a5df77780fc",
+        "created_at": "2024-01-15T16:56:12.457065",
+        "updated_at": "2024-01-15T16:56:12.457115",
+        "name": "Gazar",
+        "age": 18,
         "__class__": "User"
     }
 }

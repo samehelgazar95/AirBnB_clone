@@ -2,6 +2,6 @@
 from models.city import City
 
 
-b = City()
+b = {'name': "Hello", 'age': 28}
 
-print(b)
+print(type(b) == dict)
