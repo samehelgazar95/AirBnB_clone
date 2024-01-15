@@ -7,7 +7,10 @@ import models
 
 
 class BaseModel:
-    """The BaseModel class"""
+    """The BaseModel class
+        Arguments:
+        DATE_FORMAT: The creating and updating date format
+    """
 
     DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
