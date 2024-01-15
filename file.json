@@ -1,71 +1,25 @@
 {
-  "User.49916636-5eb8-4dcb-b3cc-89a9f8c7e3a6": {
-    "id": "49916636-5eb8-4dcb-b3cc-89a9f8c7e3a6",
-    "created_at": "2024-01-13T16:12:11.150559",
-    "updated_at": "2024-01-13T16:12:11.150616",
-    "__class__": "User"
-  },
-  "BaseModel.8b2c8893-6e27-4f11-96d9-7f19a5bc5a56": {
-    "id": "8b2c8893-6e27-4f11-96d9-7f19a5bc5a56",
-    "created_at": "2024-01-13T16:12:17.915325",
-    "updated_at": "2024-01-13T16:12:17.915360",
-    "__class__": "BaseModel"
-  },
-  "City.604d947f-49d3-4656-a68c-9d165ae86d86": {
-    "id": "604d947f-49d3-4656-a68c-9d165ae86d86",
-    "created_at": "2024-01-13T16:12:21.868036",
-    "updated_at": "2024-01-13T16:12:21.868074",
-    "first_name": "Alex",
-    "__class__": "City"
-  },
-  "Amenity.65784e54-1d95-4882-81a8-d2e8adc85f79": {
-    "id": "65784e54-1d95-4882-81a8-d2e8adc85f79",
-    "created_at": "2024-01-13T18:10:19.388216",
-    "updated_at": "2024-01-13T18:10:19.388257",
-    "__class__": "Amenity"
-  },
-  "User.d2a96674-f03f-40e6-afff-dc2d6857662b": {
-    "id": "d2a96674-f03f-40e6-afff-dc2d6857662b",
-    "created_at": "2024-01-13T18:17:12.232723",
-    "updated_at": "2024-01-13T18:17:12.232770",
-    "__class__": "User"
-  },
-  "BaseModel.1b081f61-3d5a-4cd6-aa50-0bd2fb19fc69": {
-    "id": "1b081f61-3d5a-4cd6-aa50-0bd2fb19fc69",
-    "created_at": "2024-01-14T03:41:14.915591",
-    "updated_at": "2024-01-14T03:41:14.915722",
-    "name": "My First Model",
-    "my_number": 89,
-    "__class__": "BaseModel"
-  },
-  "BaseModel.5032d45e-d567-4c4b-b9d8-5debd9b3be74": {
-    "id": "5032d45e-d567-4c4b-b9d8-5debd9b3be74",
-    "created_at": "2024-01-14T04:43:08.547774",
-    "updated_at": "2024-01-14T04:43:08.547793",
-    "__class__": "BaseModel"
-  },
-  "BaseModel.a4484295-81ef-4342-9053-47fff7504c66": {
-    "id": "a4484295-81ef-4342-9053-47fff7504c66",
-    "created_at": "2024-01-14T04:43:08.548021",
-    "updated_at": "2024-01-14T04:43:08.548028",
-    "__class__": "BaseModel"
-  },
-  "BaseModel.a5700942-1799-415b-b1f9-1788d102af4c": {
-    "id": "a5700942-1799-415b-b1f9-1788d102af4c",
-    "created_at": "2024-01-14T04:43:08.548190",
-    "updated_at": "2024-01-14T04:43:08.548192",
-    "__class__": "BaseModel"
-  },
-  "BaseModel.6ee6df76-dde4-4b6c-acff-d1d209d3d02b": {
-    "id": "6ee6df76-dde4-4b6c-acff-d1d209d3d02b",
-    "created_at": "2024-01-14T04:43:08.548571",
-    "updated_at": "2024-01-14T04:43:08.548577",
-    "__class__": "BaseModel"
-  },
-  "BaseModel.52cb6a66-6989-44d8-8e08-206843250dcb": {
-    "id": "52cb6a66-6989-44d8-8e08-206843250dcb",
-    "created_at": "2024-01-01T00:00:00.123456",
-    "updated_at": "2024-01-14T04:43:08.548732",
-    "__class__": "BaseModel"
-  }
+    "City.0d047380-e7c5-47b7-9109-c498d75b30b5": {
+        "id": "0d047380-e7c5-47b7-9109-c498d75b30b5",
+        "created_at": "2024-01-14T23:37:39.927868",
+        "updated_at": "2024-01-14T23:37:39.927904",
+        "__class__": "City"
+    },
+    "BaseModel.d04d1f99-9fac-4548-bbf4-a4cbd2550007": {
+        "id": "d04d1f99-9fac-4548-bbf4-a4cbd2550007",
+        "created_at": "2024-01-15T02:38:05.044123",
+        "updated_at": "2024-01-15T02:38:05.044139",
+        "__class__": "BaseModel"
+    },
+    "User.ce50bba5-6f40-45f7-adfc-867159f726ce": {
+        "id": "ce50bba5-6f40-45f7-adfc-867159f726ce",
+        "created_at": "2024-01-15T03:21:55.137515",
+        "updated_at": "2024-01-15T03:21:55.137541",
+        "first": "Sameh",
+        "last": "Gazar",
+        "Hello": "World",
+        "Hi": "There",
+        "'age'": 28,
+        "__class__": "User"
+    }
 }

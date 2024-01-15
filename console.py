@@ -39,57 +39,62 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def default(self, line):
-        """Handling User.count(), User.all(),
+        """Handling User.count(), User.all(), User.create()
             User.show(id), User.destroy(id),
             User.update(id, attr, val)
             Arguments:
-                method: Getting the method to execute
+                quotes: Using for stripping
+                methods: methods map
                 obj: Getting the instance
-                beg_params: char's index beginning of the params
-                end_params: char's index ending of the params
+                method: Getting the method to execute
                 all_params: The params to pass to method
-
-                =======================================
-                = ALTERNITAVE CODE THAT I LIKED:
-                = if '.' in line:
-                =     obj, rest = line.split('.', 1)
-                =     method, params = rest.split('(', 1)
-                =     params = params.rstrip(')')
-                =     params = [p.strip(' "\'') for p in params.split(',')]
-                =     all_params = [obj] + params
-                =     all_params = ' '.join(all_params)
-                =     methods = {
-                =         'all': self.do_all,
-                =         'count': self.do_count,
-                =         'show': self.do_show,
-                =         'destroy': self.do_destroy,
-                =         'update': self.do_update
-                =     }
-                =
-                =     if method in methods:
-                =        methods[method](all_params)
-                =======================================
             """
         if '.' in line:
-            args = line.split('.')
-            if len(args) == 2:
-                method = args[1][:args[1].find('(')]
-                obj = args[0]
-                beg_params = args[1].find('(') + 1
-                end_params = args[1].find(')')
-                all_params = args[1][beg_params:end_params].split(',')
-                all_params.insert(0, obj)
-                all_params = [x.strip(' "\'') for x in all_params]
-                all_params = ' '.join(all_params).strip(' ')
-                methods = {
-                    'all': self.do_all,
-                    'count': self.do_count,
-                    'show': self.do_show,
-                    'destroy': self.do_destroy,
-                    'update': self.do_update
-                    }
-                if method in methods.keys():
-                    methods[method](all_params)
+            quotes = ' \'"'
+            methods = {
+                'create': self.do_create,
+                'all': self.do_all,
+                'count': self.do_count,
+                'show': self.do_show,
+                'destroy': self.do_destroy,
+                'update': self.do_update
+                }
+            obj, rest = line.split('.', 1)
+            method, params = rest.split('(', 1)
+
+            if params == ')':
+                # Handling no args, ex: args = ''
+                all_params = obj
+            else:
+                if ',' not in params:
+                    # Handling just id arg, ex: args = id
+                    all_params = [obj] + params.strip(quotes+')').split(quotes)
+                    all_params = ' '.join(all_params).strip(' ')
+                elif ',' in params:
+                    # Handling args for update(), id - key - val
+                    id, items = params.split(',', 1)
+                    id = id.strip(quotes)
+                    items = items.strip(' )(')
+
+                    if items.startswith('{') and items.endswith('}'):
+                        dict_items = items.strip('{ }').split(',')
+                        for item in dict_items:
+                            # Handling passing dictionary to update()
+                            k, v = item.split(':')
+                            k, v = k.strip(quotes), v.strip(quotes)
+                            all_params = list((obj, id, k, v))
+                            all_params = ' '.join(all_params).strip(' ')
+                            # Invoking update() for each item
+                            if method in methods.keys():
+                                methods[method](all_params)
+                    else:
+                        # Handling just one item (key, val) passing to update()
+                        k_and_v = [x.strip(quotes) for x in items.split(',')]
+                        all_params = [obj, id] + k_and_v
+                        all_params = ' '.join(all_params).strip(' ')
+            # Invoking the proper method for each all_params
+            if method in methods.keys():
+                methods[method](all_params)
         else:
             cmd.Cmd.default(self, line)
 
@@ -152,12 +157,17 @@ class HBNBCommand(cmd.Cmd):
     def do_destroyall(self, line):
         """Deletes all instances from __object
             and from the file.json"""
-        if line:
-            print("** destroyall don't take any arguments **")
-            return
         keys = list(self.all_objects().keys())
-        for key in keys:
-            del self.all_objects()[key]
+        if line:
+            if self.check_name(line) == HBNBCommand.flag:
+                return
+            for key in keys:
+                obj_name, obj_id = key.split('.')
+                if obj_name == line:
+                    del self.all_objects()[key]
+        else:
+            for key in keys:
+                del self.all_objects()[key]
         self.store_save()
         self.store_reload()
 

@@ -25,7 +25,8 @@ class TestBase(unittest.TestCase):
 
     def test_is_FileStorage_a_class(self):
         b = FileStorage()
-        self.assertTrue(str(b.__class__), "<class 'models.engine.FileStorage'>")
+        cls_name = "<class 'models.engine.FileStorage'>"
+        self.assertTrue(str(b.__class__), cls_name)
 
 
 if __name__ == "__main__":
