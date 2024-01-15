@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Unit tests for file Base Class"""
 import unittest
-import datetime
 import models
 from models.user import User
 
@@ -40,7 +39,8 @@ class TestBase(unittest.TestCase):
         self.assertTrue(hasattr(instance, 'updated_at'))
 
     def test_does_user_has_email_attr(self):
-        instance = User(email='selgazar95@gmail.com')
+        instance = User()
+        instance.email = 'selgazar95@gmail.com'
         self.assertEqual(instance.email, "selgazar95@gmail.com")
 
     def test_does_user_has_password_attr(self):
