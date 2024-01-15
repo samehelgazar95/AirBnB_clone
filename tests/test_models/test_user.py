@@ -24,41 +24,41 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(User.__doc__) > 0)
 
     def test_is_user_a_class(self):
-        b = User()
-        self.assertTrue(str(b.__class__), "<class 'models.user.User'>")
+        instance = User()
+        self.assertTrue(str(instance.__class__), "<class 'models.user.User'>")
 
     def test_does_user_has_id_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'id'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'id'))
 
     def test_does_user_has_created_at_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'created_at'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'created_at'))
 
     def test_does_user_has_updated_at_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'updated_at'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'updated_at'))
 
     def test_does_user_has_email_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'email'))
+        instance = User(email='selgazar95@gmail.com')
+        self.assertEqual(instance.email, "selgazar95@gmail.com")
 
     def test_does_user_has_password_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'password'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'password'))
 
     def test_does_user_has_first_name_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'first_name'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'first_name'))
 
     def test_does_user_has_last_name_attr(self):
-        b = User()
-        self.assertTrue(hasattr(b, 'last_name'))
+        instance = User()
+        self.assertTrue(hasattr(instance, 'last_name'))
 
     def test_instantiation(self):
         """Test object creation and attribute setting."""
-        obj = User(name="Sameh")
-        self.assertEqual(obj.name, "Sameh")
+        instance = User(name="Sameh")
+        self.assertEqual(instance.name, "Sameh")
 
 
 if __name__ == "__main__":

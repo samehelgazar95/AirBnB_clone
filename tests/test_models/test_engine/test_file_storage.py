@@ -11,13 +11,13 @@ class TestBase(unittest.TestCase):
 
     def setUp(self):
         '''Imports module, instantiates class'''
-        pass
-
-    def tearDown(self):
-        '''Cleans up after each test_method.'''
         FileStorage._FileStorage__objects = {}
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
+
+    def tearDown(self):
+        pass
+        '''Cleans up after each test_method.'''
 
     def test_does_module_has_doc(self):
         doc = models.engine.file_storage.__doc__
