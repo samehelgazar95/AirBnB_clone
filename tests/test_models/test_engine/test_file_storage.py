@@ -28,6 +28,18 @@ class TestBase(unittest.TestCase):
         cls_name = "<class 'models.engine.FileStorage'>"
         self.assertTrue(str(b.__class__), cls_name)
 
+    def test_does_FileStorage_has_private_file_path(self):
+        obj = FileStorage()
+        self.assertEqual(str, type(obj._FileStorage__file_path))
+
+    def test_does_FileStorage_has_private_objects(self):
+        obj = FileStorage()
+        self.assertEqual(dict, type(obj._FileStorage__objects))
+
+    def test_FileStorage_all(self):
+        obj = FileStorage()
+        self.assertEqual(dict, type(obj.all()))
+
 
 if __name__ == "__main__":
     unittest.main()
