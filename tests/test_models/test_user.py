@@ -40,8 +40,7 @@ class TestBase(unittest.TestCase):
 
     def test_does_user_has_email_attr(self):
         instance = User()
-        instance.email = 'selgazar95@gmail.com'
-        self.assertEqual(instance.email, "selgazar95@gmail.com")
+        self.assertIsInstance(instance.email, str)
 
     def test_does_user_has_password_attr(self):
         instance = User()
