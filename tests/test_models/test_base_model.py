@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """Unit tests for file Base Class"""
 import unittest
-import datetime
+from datetime import datetime
+import os
+from models.engine.file_storage import FileStorage
 import models
 from models.base_model import BaseModel
 
@@ -15,7 +17,9 @@ class TestBase(unittest.TestCase):
 
     def tearDown(self):
         '''Cleans up after each test_method.'''
-        pass
+        FileStorage._FileStorage__objects = {}
+        if os.path.exists(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
 
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.base_model.__doc__) > 0)
@@ -24,60 +28,57 @@ class TestBase(unittest.TestCase):
         self.assertTrue(len(BaseModel.__doc__) > 0)
 
     def test_is_basemodel_a_class(self):
-        obj = BaseModel()
+        instance = BaseModel()
         cls_str = "<class 'models.base_model.BaseModel'>"
-        self.assertTrue(str(obj.__class__), cls_str)
+        self.assertTrue(str(instance.__class__), cls_str)
 
     def test_does_basemodel_has_id_attr(self):
-        obj = BaseModel()
-        self.assertTrue(hasattr(obj, 'id'))
+        instance = BaseModel()
+        self.assertTrue(hasattr(instance, 'id'))
 
     def test_does_basemodel_has_created_at_attr(self):
-        obj = BaseModel()
-        self.assertTrue(hasattr(obj, 'created_at'))
+        instance = BaseModel()
+        self.assertTrue(hasattr(instance, 'created_at'))
 
     def test_does_basemodel_has_updated_at_attr(self):
-        obj = BaseModel()
-        self.assertTrue(hasattr(obj, 'updated_at'))
+        instance = BaseModel()
+        self.assertTrue(hasattr(instance, 'updated_at'))
 
     def test_inheritance(self):
         """Test inheritance from BaseModel."""
-        obj = BaseModel()
-        self.assertIsNotNone(obj.id)
-        self.assertIsInstance(obj.created_at, datetime.datetime)
-        self.assertIsInstance(obj.updated_at, datetime.datetime)
+        instance = BaseModel()
+        self.assertIsNotNone(instance.id)
+        self.assertIsInstance(instance.created_at, datetime)
+        self.assertIsInstance(instance.updated_at, datetime)
 
     def test_str(self):
-        obj = BaseModel()
-        date = 2024, 1, 1, 1, 1, 1, int(0.123456*1000000)
-        obj.created_at = datetime.datetime(date)
-        cls_name = obj.to_dict()['__class__']
-        excepted_str = f"[{cls_name}] ({obj.id}) {obj.__dict__}"
-        self.assertEqual(str(obj), excepted_str)
+        instance = BaseModel()
+        instance.created_at = datetime(2024, 1, 1, 1, 1, 1, 123456)
+        cls_name = instance.to_dict()['__class__']
+        excepted_str = f"[{cls_name}] ({instance.id}) {instance.__dict__}"
+        self.assertEqual(str(instance), excepted_str)
 
     def test_to_dict(self):
-        obj = BaseModel()
-        date = 2024, 1, 1, 0, 0, 0, int(0.123456*1000000)
-        obj.created_at = datetime.datetime(date)
+        instance = BaseModel()
+        instance.created_at = datetime(2024, 1, 1, 0, 0, 0, 123456)
         expected_dict = {
-            'id': obj.id,
+            'id': instance.id,
             'created_at': '2024-01-01T00:00:00.123456',
-            'updated_at': obj.updated_at.isoformat(),
-            '__class__': obj.to_dict()['__class__']
+            'updated_at': instance.updated_at.isoformat(),
+            '__class__': instance.to_dict()['__class__']
         }
-        self.assertEqual(obj.to_dict(), expected_dict)
+        self.assertEqual(instance.to_dict(), expected_dict)
 
     def test_save(self):
-        obj = BaseModel()
-        date = 2024, 1, 1, 0, 0, 0, int(0.123456*1000000)
-        obj.created_at = datetime.datetime(date)
+        instance = BaseModel()
+        instance.created_at = datetime(2024, 1, 1, 0, 0, 0, 123456)
         expected_dict = {
-            'id': obj.id,
+            'id': instance.id,
             'created_at': '2024-01-01T00:00:00.123456',
-            'updated_at': obj.updated_at.isoformat(),
-            '__class__': obj.to_dict()['__class__']
+            'updated_at': instance.updated_at.isoformat(),
+            '__class__': instance.to_dict()['__class__']
         }
-        self.assertEqual(obj.to_dict(), expected_dict)
+        self.assertEqual(instance.to_dict(), expected_dict)
 
 
 if __name__ == "__main__":
