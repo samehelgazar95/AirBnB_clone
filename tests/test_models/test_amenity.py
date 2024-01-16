@@ -7,8 +7,8 @@ from models.engine.file_storage import FileStorage
 from models.amenity import Amenity
 
 
-class TestBase(unittest.TestCase):
-    """UnitTest for Base Class Class"""
+class TestAmenity(unittest.TestCase):
+    """UnitTest for Amenity Class Class"""
 
     def setUp(self):
         '''Imports module, instantiates class'''

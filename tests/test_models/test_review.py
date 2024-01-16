@@ -7,8 +7,8 @@ from models.engine.file_storage import FileStorage
 from models.review import Review
 
 
-class TestBase(unittest.TestCase):
-    """UnitTest for Base Class Class"""
+class TestReview(unittest.TestCase):
+    """UnitTest for Review Class Class"""
 
     def setUp(self):
         '''Imports module, instantiates class'''

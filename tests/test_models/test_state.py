@@ -7,8 +7,8 @@ from models.engine.file_storage import FileStorage
 from models.state import State
 
 
-class TestBase(unittest.TestCase):
-    """UnitTest for Base Class Class"""
+class TestState(unittest.TestCase):
+    """UnitTest for State Class Class"""
 
     def setUp(self):
         '''Imports module, instantiates class'''

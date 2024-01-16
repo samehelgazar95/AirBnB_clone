@@ -7,8 +7,8 @@ from models.engine.file_storage import FileStorage
 from models.place import Place
 
 
-class TestBase(unittest.TestCase):
-    """UnitTest for Base Class Class"""
+class TestPlace(unittest.TestCase):
+    """UnitTest for Place Class Class"""
 
     def setUp(self):
         '''Imports module, instantiates class'''

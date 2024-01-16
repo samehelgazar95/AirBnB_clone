@@ -38,6 +38,14 @@ class HBNBCommand(cmd.Cmd):
         print('')
         return True
 
+    def help_quit(self):
+        """The quit command help"""
+        print('Quit command to exit the program\n')
+
+    def help_EOF(self):
+        """The EOF command help"""
+        print('EOF command to exit the program\n')
+
     def default(self, line):
         """Handling User.count(), User.all(), User.create()
             User.show(id), User.destroy(id),
@@ -88,17 +96,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             cmd.Cmd.default(self, line)
 
-    def help_quit(self):
-        """The quit command help"""
-        print('Quit command to exit the program\n')
-
-    def help_EOF(self):
-        """The EOF command help"""
-        print('EOF command to exit the program\n')
-
     def do_create(self, line):
-        """Creating a new instance of BaseModel,
-            saves it (to the JSON file) and prints the id"""
+        """Creating a new instance and save it"""
         if self.check_line(line) == HBNBCommand.flag:
             return
         if self.check_name(line) == HBNBCommand.flag:
@@ -108,8 +107,7 @@ class HBNBCommand(cmd.Cmd):
         print(my_model.id)
 
     def do_show(self, line):
-        """Printing the string representation of an instance
-            based on the class name """
+        """Printing the string representation"""
         if self.check_line(line) == HBNBCommand.flag:
             return
         args = line.split(' ')
@@ -145,8 +143,7 @@ class HBNBCommand(cmd.Cmd):
             self.store_reload()
 
     def do_destroyall(self, line):
-        """Deletes all instances from __object
-            and from the file.json"""
+        """Reseting everything"""
         keys = list(self.all_objects().keys())
         if line:
             if self.check_name(line) == HBNBCommand.flag:
@@ -162,8 +159,7 @@ class HBNBCommand(cmd.Cmd):
         self.store_reload()
 
     def do_all(self, line):
-        """Printing all string representation of all instances based,
-            or not on the class name"""
+        """Printing all string representation of all instances"""
         objects_list = []
         if not line:
             for val in self.all_objects().values():
@@ -177,8 +173,7 @@ class HBNBCommand(cmd.Cmd):
         print(objects_list)
 
     def do_update(self, line):
-        """Updating the instance by adding new attribute or,
-            by updating the exising attribute"""
+        """Updating the instance by adding new attributes"""
         if self.check_line(line) == HBNBCommand.flag:
             return
         args = line.split(' ')
@@ -229,8 +224,7 @@ class HBNBCommand(cmd.Cmd):
             return HBNBCommand.flag
 
     def do_count(self, line):
-        """Printing all string representation of all instances based,
-            or not on the class name"""
+        """Counting How many instance are there"""
         counter = 0
         if line:
             if self.check_name(line) == HBNBCommand.flag:

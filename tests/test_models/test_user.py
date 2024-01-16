@@ -7,8 +7,8 @@ import models
 from models.user import User
 
 
-class TestBase(unittest.TestCase):
-    """UnitTest for Base Class Class"""
+class TestUser(unittest.TestCase):
+    """UnitTest for User Class Class"""
     
     def setUp(self):
         '''Imports module, instantiates class'''
