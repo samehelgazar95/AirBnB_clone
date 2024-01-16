@@ -20,7 +20,6 @@ class TestAmenity(unittest.TestCase):
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
-
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.amenity.__doc__) > 0)
 
@@ -46,8 +45,6 @@ class TestAmenity(unittest.TestCase):
     def test_does_user_has_email_attr(self):
         instance = Amenity()
         self.assertIsInstance(instance.name, str)
-
-
 
 
 if __name__ == "__main__":

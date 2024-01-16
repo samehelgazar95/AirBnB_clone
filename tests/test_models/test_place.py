@@ -20,7 +20,6 @@ class TestPlace(unittest.TestCase):
         if os.path.exists(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
-
     def test_does_module_has_doc(self):
         self.assertTrue(len(models.place.__doc__) > 0)
 

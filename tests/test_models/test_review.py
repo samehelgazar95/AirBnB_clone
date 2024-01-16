@@ -49,6 +49,5 @@ class TestReview(unittest.TestCase):
         self.assertIsInstance(instance.text, str)
 
 
-
 if __name__ == "__main__":
     unittest.main()

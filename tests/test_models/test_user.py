@@ -9,7 +9,7 @@ from models.user import User
 
 class TestUser(unittest.TestCase):
     """UnitTest for User Class Class"""
-    
+
     def setUp(self):
         '''Imports module, instantiates class'''
         pass
@@ -48,7 +48,6 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(instance.password, str)
         self.assertIsInstance(instance.last_name, str)
         self.assertIsInstance(instance.first_name, str)
-
 
 
 if __name__ == "__main__":
