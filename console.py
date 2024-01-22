@@ -143,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
             self.store_reload()
 
     def do_destroyall(self, line):
-        """Reseting everything"""
+        """Resetting everything"""
         keys = list(self.all_objects().keys())
         if line:
             if self.check_name(line) == HBNBCommand.flag:
