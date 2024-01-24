@@ -7,3 +7,9 @@ header {
   background-repeat: no-repeat;
   background-position: 20px 50%;
 }
+
+@media (max-width: 480px) {
+  header {
+    background-position: 50% 50%;
+  }
+}

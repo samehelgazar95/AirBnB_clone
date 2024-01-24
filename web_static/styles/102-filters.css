@@ -25,6 +25,10 @@
   opacity: 90%;
 }
 
+.filters .phone {
+  display: none;
+}
+
 .filters .locations,
 .filters .amenities {
   height: 100%;
@@ -86,4 +90,42 @@
 .filters .filters h4 {
   font-weight: 400;
   font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .filters button,
+  .filters .locations,
+  .filters .amenities {
+    display: none;
+  }
+
+  .filters .phone {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .filters .phone div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .filters .phone div h3 {
+    font-size: 20px;
+  }
+
+  .filters .phone div h2 {
+    font-size: 15px;
+  }
+
+  .filters .phone i {
+    position: absolute;
+    top: 50%;
+    left: 35px;
+    transform: translateY(-50%);
+    font-size: 35px;
+    color: #ff5a5f;
+  }
 }
